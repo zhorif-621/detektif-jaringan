@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Game edukasi simulasi troubleshooting jaringan untuk siswa SMK TJKT: Detektif Jaringan - Misi Perbaiki Koneksi.">
+  <title>Detektif Jaringan: Misi Perbaiki Koneksi</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#app">Lewati ke konten</a>
+
+<header class="topbar">
+  <button class="brand" id="btn-brand" type="button" aria-label="Kembali ke menu utama">
+    <span class="brand-ikon" aria-hidden="true">🕵️</span>
+    <span class="brand-teks">Detektif Jaringan</span>
+  </button>
+  <nav class="topnav" aria-label="Pintasan">
+    <button type="button" class="link-btn" id="btn-bantuan">Cara Bermain</button>
+    <button type="button" class="link-btn" id="btn-catatan">Catatan Teknisi</button>
+  </nav>
+</header>
+
+<main id="app" tabindex="-1">
+
+  <!-- ===================== MENU ===================== -->
+  <section id="layar-menu" class="layar" aria-labelledby="judul-menu">
+    <div class="hero">
+      <p class="kicker">Game Edukasi · Simulasi Troubleshooting Jaringan</p>
+      <h1 id="judul-menu">Detektif Jaringan<span>Misi Perbaiki Koneksi</span></h1>
+      <p class="lead">Kamu teknisi jaringan sebuah sekolah dan kantor. Terima laporan gangguan, selidiki dengan
+        <code>ping</code>, <code>tracert</code>, <code>nslookup</code>, baca hasilnya, lalu tentukan penyebab dan
+        perbaikan yang tepat. Aman dicoba — ini hanya simulasi.</p>
+      <div class="aksi-menu">
+        <button type="button" class="btn utama" id="btn-mulai">▶ Mulai Misi Baru</button>
+        <button type="button" class="btn" id="btn-lanjut" hidden>⏩ Lanjutkan</button>
+      </div>
+      <ul class="fakta" aria-label="Ringkasan game">
+        <li><strong>8</strong> level bertahap</li>
+        <li><strong>5</strong> petunjuk terbatas</li>
+        <li><strong>3</strong> nyawa per misi</li>
+      </ul>
+    </div>
+    <aside class="kartu identitas" aria-label="Identitas proyek">
+      <h2>Identitas Proyek</h2>
+      <dl>
+        <dt>Pengembang</dt><dd>Zhorif Fadrul Rahman</dd>
+        <dt>NIM</dt><dd>24076049</dd>
+        <dt>Mata kuliah</dt><dd>Game Edukasi (TIK1.61.5319)</dd>
+        <dt>Program studi</dt><dd>Pendidikan Teknik Informatika, FT UNP</dd>
+        <dt>Sasaran</dt><dd>Siswa SMK TJKT &amp; mahasiswa pemula jaringan komputer</dd>
+        <dt>Tahap</dt><dd>Prototipe UTS (mekanisme inti + 8 misi)</dd>
+      </dl>
+    </aside>
+  </section>
+
+  <!-- ===================== PETA LEVEL ===================== -->
+  <section id="layar-peta" class="layar" hidden aria-labelledby="judul-peta">
+    <div class="kepala-layar">
+      <div>
+        <h2 id="judul-peta">Pilih Misi</h2>
+        <p class="sub">Selesaikan misi berurutan untuk membuka level berikutnya.</p>
+      </div>
+      <div class="statistik" aria-label="Statistik permainan">
+        <span class="chip">Skor <strong id="peta-skor">0</strong> / <span id="peta-maks">800</span></span>
+        <span class="chip">💡 Petunjuk <strong id="peta-petunjuk">5</strong></span>
+        <button type="button" class="btn kecil emas" id="btn-hasil-akhir" hidden>🏁 Lihat Hasil Akhir</button>
+      </div>
+    </div>
+    <ol class="grid-misi" id="grid-misi"></ol>
+  </section>
+
+  <!-- ===================== MISI ===================== -->
+  <section id="layar-misi" class="layar" hidden aria-labelledby="misi-judul">
+    <div class="hud" role="group" aria-label="Status misi">
+      <button type="button" class="btn kecil" id="btn-ke-peta">← Peta</button>
+      <div class="hud-judul">
+        <span class="chip tingkat" id="misi-level">Level 1</span>
+        <h2 id="misi-judul">Judul Misi</h2>
+      </div>
+      <div class="hud-status">
+        <span class="chip" title="Nyawa tersisa">Nyawa <span id="hud-nyawa" aria-label="nyawa">❤❤❤</span></span>
+        <span class="chip" title="Petunjuk tersisa">💡 <strong id="hud-petunjuk">5</strong></span>
+        <span class="chip" title="Total skor">Skor <strong id="hud-skor">0</strong></span>
+      </div>
+    </div>
+
+    <ol class="tahap" id="tahap" aria-label="Tahap misi">
+      <li data-tahap="investigasi">1 · Investigasi</li>
+      <li data-tahap="diagnosis">2 · Diagnosis</li>
+      <li data-tahap="perbaikan">3 · Perbaikan</li>
+      <li data-tahap="selesai">4 · Selesai</li>
+    </ol>
+
+    <div class="misi-grid">
+      <div class="kolom-kiri">
+        <article class="kartu tiket" aria-labelledby="tiket-judul">
+          <h3 id="tiket-judul">🎫 Tiket Laporan</h3>
+          <dl>
+            <dt>Pelapor</dt><dd id="tiket-pelapor"></dd>
+            <dt>Lokasi</dt><dd id="tiket-lokasi"></dd>
+            <dt>Tingkat</dt><dd id="tiket-tingkat"></dd>
+          </dl>
+          <blockquote id="tiket-laporan"></blockquote>
+          <p class="info-jaringan" id="tiket-info" hidden></p>
+        </article>
+
+        <section class="kartu" aria-labelledby="aksi-judul">
+          <h3 id="aksi-judul">🧰 Langkah Investigasi</h3>
+          <p class="sub kecil-teks">Klik untuk menjalankan. Mengulang langkah yang sama tidak menambah hitungan langkah.</p>
+          <div id="daftar-aksi"></div>
+        </section>
+      </div>
+
+      <div class="kolom-kanan">
+        <section class="terminal" aria-labelledby="terminal-judul">
+          <div class="terminal-bar">
+            <span class="titik r"></span><span class="titik k"></span><span class="titik h"></span>
+            <h3 id="terminal-judul">Terminal Teknisi (simulasi)</h3>
+            <span class="langkah-info">Langkah: <strong id="info-langkah">0</strong> · Target ≤ <span id="info-par">3</span></span>
+          </div>
+          <div class="terminal-isi" id="terminal" tabindex="0" role="log" aria-label="Hasil perintah"></div>
+        </section>
+
+        <div class="bar-kontrol">
+          <button type="button" class="btn" id="btn-petunjuk">💡 Minta Petunjuk (−5 skor)</button>
+          <button type="button" class="btn utama" id="btn-diagnosis">Saya sudah tahu penyebabnya →</button>
+        </div>
+        <div class="kotak-petunjuk" id="kotak-petunjuk" role="status" aria-live="polite" hidden></div>
+
+        <section class="kartu keputusan" id="panel-keputusan" hidden aria-labelledby="keputusan-judul">
+          <h3 id="keputusan-judul">Apa penyebabnya?</h3>
+          <p class="sub kecil-teks" id="keputusan-sub"></p>
+          <div class="opsi" id="daftar-opsi"></div>
+          <div class="umpan-balik" id="umpan-balik" role="status" aria-live="polite" hidden></div>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== HASIL AKHIR ===================== -->
+  <section id="layar-akhir" class="layar" hidden aria-labelledby="judul-akhir">
+    <div class="kartu akhir">
+      <p class="kicker">Laporan Akhir Teknisi</p>
+      <h2 id="judul-akhir">Peringkat: <span id="akhir-peringkat"></span></h2>
+      <p class="lead" id="akhir-pesan"></p>
+      <p class="skor-besar"><strong id="akhir-skor">0</strong> <span>/ <span id="akhir-maks">800</span></span></p>
+      <div class="tabel-bungkus">
+        <table class="tabel" aria-label="Ringkasan hasil per misi">
+          <thead><tr><th>Level</th><th>Misi</th><th>Status</th><th>Bintang</th><th class="angka">Skor</th></tr></thead>
+          <tbody id="akhir-tabel"></tbody>
+        </table>
+      </div>
+      <div class="aksi-menu">
+        <button type="button" class="btn utama" id="btn-akhir-peta">Kembali ke Peta (ulangi misi)</button>
+        <button type="button" class="btn" id="btn-akhir-baru">Mulai dari Awal</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="kaki">
+  <span>UTS Game Edukasi · TIK1.61.5319 · Program Studi Pendidikan Teknik Informatika, FT UNP</span>
+  <span>Zhorif Fadrul Rahman · NIM 24076049</span>
+  <span id="sumber-data" class="redup"></span>
+</footer>
+
+<!-- ===================== DIALOG ===================== -->
+<dialog id="dlg-bantuan" aria-labelledby="bantuan-judul">
+  <form method="dialog" class="dlg">
+    <h2 id="bantuan-judul">Cara Bermain</h2>
+    <ol class="langkah-bantu">
+      <li><strong>Baca tiket laporan.</strong> Pahami gejala, lokasi, dan catatan jaringan (jika ada).</li>
+      <li><strong>Investigasi.</strong> Klik langkah di panel kiri (periksa kabel, <code>ipconfig</code>, <code>ping</code>, <code>nslookup</code>, <code>tracert</code>, dll.) lalu baca hasilnya di terminal. Semakin sedikit langkah yang efektif, semakin besar bonus.</li>
+      <li><strong>Diagnosis.</strong> Tekan “Saya sudah tahu penyebabnya”, lalu pilih penyebab yang paling sesuai dengan bukti.</li>
+      <li><strong>Perbaikan.</strong> Pilih tindakan perbaikan yang paling tepat. Setelah benar, game memverifikasi koneksi dengan <code>ping</code>.</li>
+    </ol>
+    <h3>Aturan skor</h3>
+    <ul>
+      <li>Diagnosis benar: <strong>40</strong> poin (20 jika pernah salah).</li>
+      <li>Perbaikan benar: <strong>40</strong> poin (20 jika pernah salah).</li>
+      <li>Bonus efisiensi: <strong>+20</strong> jika langkah ≤ target, <strong>+10</strong> jika ≤ target + 2.</li>
+      <li>Setiap petunjuk: <strong>−5</strong> poin, dan jatahnya hanya <strong>5</strong> untuk seluruh permainan.</li>
+      <li>Setiap jawaban salah mengurangi <strong>1 nyawa</strong> (3 nyawa per misi). Nyawa habis = misi gagal, tetapi kamu boleh mengulangnya.</li>
+    </ul>
+    <div class="dlg-aksi"><button class="btn utama" value="tutup" autofocus>Mengerti</button></div>
+  </form>
+</dialog>
+
+<dialog id="dlg-catatan" aria-labelledby="catatan-judul">
+  <form method="dialog" class="dlg">
+    <h2 id="catatan-judul">Catatan Teknisi</h2>
+    <h3>Alur troubleshooting</h3>
+    <ol id="catatan-alur" class="langkah-bantu"></ol>
+    <h3>Perintah yang dipakai</h3>
+    <div id="catatan-perintah"></div>
+    <div class="dlg-aksi"><button class="btn utama" value="tutup">Tutup</button></div>
+  </form>
+</dialog>
+
+<dialog id="dlg-hasil" aria-labelledby="hasil-judul">
+  <div class="dlg" id="hasil-isi"></div>
+</dialog>
+
+<!-- Data cadangan: dipakai saat file dibuka langsung (file://) karena browser memblokir fetch JSON lokal. -->
+<script src="data/missions.js"></script>
+<script src="js/logic.js"></script>
+<script src="js/ui.js"></script>
+</body>
+</html>
