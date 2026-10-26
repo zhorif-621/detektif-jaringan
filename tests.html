@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pengujian — Detektif Jaringan</title>
+  <style>
+    body { font-family: system-ui, "Segoe UI", Arial, sans-serif; margin: 0; padding: 24px; background: #0b1f3a; color: #e9eff7; }
+    h1 { font-size: 1.4rem; margin: 0 0 4px; } p { color: #b4c2d4; margin: 0 0 16px; }
+    .ringkas { font-size: 1.1rem; font-weight: 700; margin-bottom: 14px; }
+    .ringkas.ok { color: #5fe3a1; } .ringkas.gagal { color: #ff7b7b; }
+    .bungkus { overflow-x: auto; }
+    table { border-collapse: collapse; width: 100%; min-width: 900px; font-size: .9rem; background: #112b4f; }
+    th, td { border: 1px solid rgba(255,255,255,.15); padding: 8px 10px; text-align: left; vertical-align: top; }
+    th { background: #1a3a66; color: #e0b43a; }
+    td.st { font-weight: 800; white-space: nowrap; } td.st.b { color: #5fe3a1; } td.st.g { color: #ff7b7b; }
+    a { color: #e0b43a; }
+  </style>
+</head>
+<body>
+  <h1>Pengujian Otomatis — Detektif Jaringan: Misi Perbaiki Koneksi</h1>
+  <p>UTS Game Edukasi (TIK1.61.5319) · Zhorif Fadrul Rahman · NIM 24076049 · <a href="../index.html">← kembali ke game</a></p>
+  <div id="ringkas" class="ringkas">Menjalankan pengujian…</div>
+  <div class="bungkus">
+    <table>
+      <thead><tr><th>No.</th><th>Skenario uji</th><th>Input / kondisi</th><th>Hasil diharapkan</th><th>Hasil aktual</th><th>Status</th></tr></thead>
+      <tbody id="isi"></tbody>
+    </table>
+  </div>
+  <script src="../data/missions.js"></script>
+  <script src="../js/logic.js"></script>
+  <script src="test_cases.js"></script>
+  <script>
+    (function () {
+      var hasil = window.TestCases.jalankan(window.GameLogic, window.MISSIONS_DATA);
+      var tb = document.getElementById('isi');
+      hasil.forEach(function (r) {
+        var tr = document.createElement('tr');
+        [r.no, r.skenario, r.input, r.diharapkan, r.aktual, r.status].forEach(function (v, i) {
+          var td = document.createElement('td'); td.textContent = v;
+          if (i === 5) td.className = 'st ' + (r.status === 'Berhasil' ? 'b' : 'g');
+          tr.appendChild(td);
+        });
+        tb.appendChild(tr);
+      });
+      var lulus = hasil.filter(function (r) { return r.status === 'Berhasil'; }).length;
+      var el = document.getElementById('ringkas');
+      el.textContent = 'Ringkasan: ' + lulus + ' dari ' + hasil.length + ' skenario berhasil.';
+      el.className = 'ringkas ' + (lulus === hasil.length ? 'ok' : 'gagal');
+    })();
+  </script>
+</body>
+</html>

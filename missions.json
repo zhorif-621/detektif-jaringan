@@ -1,0 +1,864 @@
+{
+  "judul": "Detektif Jaringan: Misi Perbaiki Koneksi",
+  "versi": "UTS-1.0",
+  "aksi": [
+    {
+      "id": "kabel",
+      "kelompok": "Pemeriksaan fisik",
+      "ikon": "🔌",
+      "label": "Periksa kabel LAN & lampu",
+      "perintah": "(cek fisik di lokasi)"
+    },
+    {
+      "id": "ipconfig",
+      "kelompok": "Perintah jaringan",
+      "ikon": "🧾",
+      "label": "Lihat konfigurasi IP",
+      "perintah": "ipconfig /all"
+    },
+    {
+      "id": "ping_gw",
+      "kelompok": "Perintah jaringan",
+      "ikon": "📡",
+      "label": "Ping gateway",
+      "perintah": "ping {gwTarget}"
+    },
+    {
+      "id": "ping_ip",
+      "kelompok": "Perintah jaringan",
+      "ikon": "🌐",
+      "label": "Ping internet (alamat IP)",
+      "perintah": "ping 8.8.8.8"
+    },
+    {
+      "id": "ping_domain",
+      "kelompok": "Perintah jaringan",
+      "ikon": "🔤",
+      "label": "Ping nama domain",
+      "perintah": "ping {domain}"
+    },
+    {
+      "id": "nslookup",
+      "kelompok": "Perintah jaringan",
+      "ikon": "🔎",
+      "label": "Cek DNS",
+      "perintah": "nslookup {domain}"
+    },
+    {
+      "id": "tracert",
+      "kelompok": "Perintah jaringan",
+      "ikon": "🧭",
+      "label": "Telusuri rute",
+      "perintah": "tracert 8.8.8.8"
+    },
+    {
+      "id": "arp",
+      "kelompok": "Perintah jaringan",
+      "ikon": "🗂️",
+      "label": "Lihat tabel ARP",
+      "perintah": "arp -a"
+    },
+    {
+      "id": "hosts",
+      "kelompok": "Perintah jaringan",
+      "ikon": "📄",
+      "label": "Baca file hosts",
+      "perintah": "type C:\\Windows\\System32\\drivers\\etc\\hosts"
+    }
+  ],
+  "dasar": {
+    "kabel": "Hasil pemeriksaan fisik:\n • Kabel LAN terpasang kuat di port komputer dan port switch.\n • Lampu link HIJAU menyala, lampu aktivitas berkedip.\n • Kabel dan konektor RJ-45 tidak terlihat rusak.",
+    "ipconfig": "Windows IP Configuration\n\n   Host Name . . . . . . . . . . . . : {pc}\n\nEthernet adapter Ethernet:\n\n   Physical Address. . . . . . . . . : {mac}\n   DHCP Enabled. . . . . . . . . . . : {dhcp}\n   IPv4 Address. . . . . . . . . . . : {ip}\n   Subnet Mask . . . . . . . . . . . : {mask}\n   Default Gateway . . . . . . . . . : {gw}\n   DNS Servers . . . . . . . . . . . : {dns}",
+    "ping_gw": "Pinging {gwTarget} with 32 bytes of data:\nReply from {gwTarget}: bytes=32 time=1ms TTL=64\nReply from {gwTarget}: bytes=32 time=1ms TTL=64\nReply from {gwTarget}: bytes=32 time=2ms TTL=64\nReply from {gwTarget}: bytes=32 time=1ms TTL=64\n\nPing statistics for {gwTarget}:\n    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss)",
+    "ping_ip": "Pinging 8.8.8.8 with 32 bytes of data:\nReply from 8.8.8.8: bytes=32 time=18ms TTL=116\nReply from 8.8.8.8: bytes=32 time=17ms TTL=116\nReply from 8.8.8.8: bytes=32 time=19ms TTL=116\nReply from 8.8.8.8: bytes=32 time=18ms TTL=116\n\nPing statistics for 8.8.8.8:\n    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss)",
+    "ping_domain": "Pinging {domain} [{domainIp}] with 32 bytes of data:\nReply from {domainIp}: bytes=32 time=21ms TTL=115\nReply from {domainIp}: bytes=32 time=20ms TTL=115\nReply from {domainIp}: bytes=32 time=22ms TTL=115\nReply from {domainIp}: bytes=32 time=20ms TTL=115\n\nPing statistics for {domainIp}:\n    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss)",
+    "nslookup": "Server:  {dnsName}\nAddress:  {dns}\n\nNon-authoritative answer:\nName:    {domain}\nAddress: {domainIp}",
+    "tracert": "Tracing route to dns.google [8.8.8.8]\nover a maximum of 30 hops:\n\n  1    <1 ms    <1 ms    <1 ms  {gwTarget}\n  2     3 ms     2 ms     3 ms  10.20.0.1\n  3    12 ms    11 ms    12 ms  36.88.0.1\n  4    18 ms    17 ms    18 ms  dns.google [8.8.8.8]\n\nTrace complete.",
+    "arp": "Interface: {ip} --- 0x4\n  Internet Address      Physical Address      Type\n  {gwTarget}          a4-2b-b0-11-22-33     dynamic\n  192.168.0.255         ff-ff-ff-ff-ff-ff     static",
+    "hosts": "# Copyright (c) 1993-2009 Microsoft Corp.\n#\n# File HOSTS ini memetakan nama host ke alamat IP.\n# Contoh format:  102.54.94.97   rhino.acme.com\n#\n# Resolusi nama localhost sudah ditangani oleh DNS itu sendiri.\n#   127.0.0.1       localhost\n#   ::1             localhost"
+  },
+  "misi": [
+    {
+      "id": 1,
+      "judul": "Kabel yang Menghilang",
+      "tingkat": "Mudah",
+      "lokasi": "Lab Komputer 2 — PC-07",
+      "pelapor": "Bu Sari (guru TJKT)",
+      "laporan": "“Pak Teknisi, PC saya tiba-tiba tidak bisa buka apa pun. Di pojok layar ikon jaringannya ada tanda silang merah.”",
+      "info": "",
+      "net": {
+        "pc": "LAB2-PC07",
+        "mac": "3C-52-82-A1-07-0B",
+        "ip": "192.168.10.27",
+        "mask": "255.255.255.0",
+        "gw": "192.168.10.1",
+        "dns": "192.168.10.1",
+        "dnsName": "router.lab2",
+        "dhcp": "Yes",
+        "domain": "www.google.com",
+        "domainIp": "142.250.190.4",
+        "gwTarget": "192.168.10.1"
+      },
+      "hasil": {
+        "kabel": "Hasil pemeriksaan fisik:\n • Kabel LAN TERLEPAS dari port komputer; konektor menggantung di belakang casing.\n • Lampu link pada port: MATI.\n • Konektor RJ-45 dan kabel tampak utuh, tidak patah.",
+        "ipconfig": "Windows IP Configuration\n\nEthernet adapter Ethernet:\n\n   Media State . . . . . . . . . . . : Media disconnected\n   Connection-specific DNS Suffix  . :",
+        "ping_gw": "Pinging 192.168.10.1 with 32 bytes of data:\nPING: transmit failed. General failure.\nPING: transmit failed. General failure.\nPING: transmit failed. General failure.\nPING: transmit failed. General failure.\n\nPing statistics for 192.168.10.1:\n    Packets: Sent = 4, Received = 0, Lost = 4 (100% loss)",
+        "ping_ip": "Pinging 8.8.8.8 with 32 bytes of data:\nPING: transmit failed. General failure.\nPING: transmit failed. General failure.\nPING: transmit failed. General failure.\nPING: transmit failed. General failure.\n\nPing statistics for 8.8.8.8:\n    Packets: Sent = 4, Received = 0, Lost = 4 (100% loss)",
+        "ping_domain": "Ping request could not find host www.google.com. Please check the name and try again.",
+        "nslookup": "DNS request timed out.\n    timeout was 2 seconds.\nServer:  UnKnown\nAddress:  192.168.10.1\n\nDNS request timed out.\n    timeout was 2 seconds.\n*** Request to UnKnown timed-out",
+        "tracert": "Tracing route to dns.google [8.8.8.8]\nover a maximum of 30 hops:\n\n  1  General failure.\n\nTrace complete.",
+        "arp": "No ARP Entries Found."
+      },
+      "relevan": [
+        "kabel",
+        "ipconfig"
+      ],
+      "par": 2,
+      "petunjuk": {
+        "mulai": "Selalu mulai dari lapisan paling bawah: apakah perangkat benar-benar terhubung secara fisik? Coba ‘Periksa kabel LAN & lampu’.",
+        "baca": "Perhatikan tulisan ‘Media disconnected’ dan lampu link yang mati. Jika lapisan fisik bermasalah, DNS/gateway belum perlu dicurigai.",
+        "perbaiki": "Masalahnya ada pada sambungan fisik. Perbaikan paling sederhana biasanya yang paling tepat."
+      },
+      "diagnosis": [
+        {
+          "id": "d1",
+          "benar": true,
+          "teks": "Kabel LAN terlepas / tidak terhubung (masalah lapisan fisik)",
+          "umpanBalik": "Tepat! ‘Media disconnected’ pada ipconfig dan lampu link yang mati membuktikan komputer tidak terhubung secara fisik."
+        },
+        {
+          "id": "d2",
+          "teks": "DNS server salah",
+          "umpanBalik": "Belum tepat. ipconfig menunjukkan ‘Media disconnected’, artinya komputer bahkan belum punya koneksi — DNS baru relevan setelah koneksi fisik dan IP beres."
+        },
+        {
+          "id": "d3",
+          "teks": "Alamat IP bentrok dengan perangkat lain",
+          "umpanBalik": "Belum tepat. IP bentrok baru terjadi jika adapter aktif dan punya IP. Di sini adapter bahkan tidak mendapat sinyal (‘Media disconnected’)."
+        },
+        {
+          "id": "d4",
+          "teks": "Router sekolah mati",
+          "umpanBalik": "Belum tepat. Jika router mati, lampu link di PC tetap bisa menyala. Di sini lampu link PC mati karena kabelnya lepas."
+        }
+      ],
+      "perbaikan": [
+        {
+          "id": "f1",
+          "benar": true,
+          "teks": "Pasang kembali kabel LAN sampai terdengar ‘klik’, lalu pastikan lampu link menyala",
+          "umpanBalik": "Benar. Setelah kabel terpasang, adapter mendapat link dan komputer kembali memperoleh konfigurasi jaringan."
+        },
+        {
+          "id": "f2",
+          "teks": "Ganti DNS menjadi 8.8.8.8",
+          "umpanBalik": "Tidak akan membantu: tanpa koneksi fisik, DNS apa pun tidak bisa dijangkau."
+        },
+        {
+          "id": "f3",
+          "teks": "Atur IP statis 192.168.10.50",
+          "umpanBalik": "Mengatur IP tidak menghidupkan link. Adapter tetap ‘Media disconnected’ selama kabel lepas."
+        },
+        {
+          "id": "f4",
+          "teks": "Restart router sekolah",
+          "umpanBalik": "Berlebihan dan mengganggu pengguna lain. Penyebabnya hanya kabel yang lepas di satu PC."
+        }
+      ],
+      "pembahasan": "Urutan troubleshooting yang baik berjalan dari bawah ke atas (fisik → IP → gateway → internet → DNS). Pada kasus ini cukup dua langkah: periksa fisik, lalu baca ipconfig. Banyak gangguan ‘internet mati’ ternyata hanya kabel longgar.",
+      "ilmu": [
+        "‘Media disconnected’ pada ipconfig = adapter tidak mendapat link fisik.",
+        "Lampu link mati pada port NIC/switch adalah petunjuk pertama masalah kabel."
+      ]
+    },
+    {
+      "id": 2,
+      "judul": "Tanda Seru Kuning",
+      "tingkat": "Mudah",
+      "lokasi": "Ruang Guru — Laptop Bu Rina",
+      "pelapor": "Bu Rina (guru Matematika)",
+      "laporan": "“Kabel LAN sudah tertancap, tapi ikon jaringan ada tanda seru kuning dan internet tidak jalan. Kemarin masih normal.”",
+      "info": "Catatan jaringan: Gateway resmi ruang guru = 192.168.20.1. Alamat IP dibagikan otomatis oleh server DHCP.",
+      "net": {
+        "pc": "GURU-RINA",
+        "mac": "A0-48-1C-5D-32-9E",
+        "ip": "169.254.37.112",
+        "mask": "255.255.0.0",
+        "gw": "",
+        "gwTarget": "192.168.20.1",
+        "dns": "",
+        "dnsName": "UnKnown",
+        "dhcp": "Yes",
+        "domain": "www.google.com",
+        "domainIp": "142.250.190.4"
+      },
+      "hasil": {
+        "ipconfig": "Windows IP Configuration\n\n   Host Name . . . . . . . . . . . . : GURU-RINA\n\nEthernet adapter Ethernet:\n\n   Physical Address. . . . . . . . . : A0-48-1C-5D-32-9E\n   DHCP Enabled. . . . . . . . . . . : Yes\n   Autoconfiguration IPv4 Address. . : 169.254.37.112(Preferred)\n   Subnet Mask . . . . . . . . . . . : 255.255.0.0\n   Default Gateway . . . . . . . . . :\n   DNS Servers . . . . . . . . . . . :",
+        "ping_gw": "Pinging 192.168.20.1 with 32 bytes of data:\nReply from 169.254.37.112: Destination host unreachable.\nReply from 169.254.37.112: Destination host unreachable.\nReply from 169.254.37.112: Destination host unreachable.\nReply from 169.254.37.112: Destination host unreachable.\n\nPing statistics for 192.168.20.1:\n    Packets: Sent = 4, Received = 0, Lost = 4 (100% loss)",
+        "ping_ip": "Pinging 8.8.8.8 with 32 bytes of data:\nPING: transmit failed. General failure.\nPING: transmit failed. General failure.\nPING: transmit failed. General failure.\nPING: transmit failed. General failure.\n\nPing statistics for 8.8.8.8:\n    Packets: Sent = 4, Received = 0, Lost = 4 (100% loss)",
+        "ping_domain": "Ping request could not find host www.google.com. Please check the name and try again.",
+        "nslookup": "*** Default servers are not available\nServer:  UnKnown\nAddress:  127.0.0.1\n\n*** UnKnown can't find www.google.com: No response from server",
+        "tracert": "Tracing route to dns.google [8.8.8.8]\nover a maximum of 30 hops:\n\n  1  GURU-RINA [169.254.37.112]  reports: Destination host unreachable.\n\nTrace complete.",
+        "arp": "No ARP Entries Found."
+      },
+      "relevan": [
+        "ipconfig",
+        "ping_gw"
+      ],
+      "par": 3,
+      "petunjuk": {
+        "mulai": "Kabel sudah tertancap. Lihat dulu alamat IP yang diterima laptop lewat ‘Lihat konfigurasi IP’.",
+        "baca": "Alamat yang diawali 169.254.x.x disebut APIPA: Windows memberi IP sendiri karena tidak ada yang membagikan IP.",
+        "perbaiki": "Siapa yang seharusnya membagikan IP otomatis? Perbaiki sumbernya lalu minta IP baru dengan ipconfig /renew."
+      },
+      "diagnosis": [
+        {
+          "id": "d1",
+          "benar": true,
+          "teks": "Laptop tidak mendapat IP dari DHCP (memakai IP otomatis APIPA 169.254.x.x)",
+          "umpanBalik": "Tepat! IP 169.254.37.112 adalah APIPA — tanda laptop meminta IP ke DHCP tetapi tidak mendapat jawaban. Gateway dan DNS pun kosong."
+        },
+        {
+          "id": "d2",
+          "teks": "Kabel LAN putus",
+          "umpanBalik": "Belum tepat. Pemeriksaan fisik menunjukkan lampu link menyala, dan adapter berstatus aktif (punya IP APIPA). Kabel bukan sumber masalah."
+        },
+        {
+          "id": "d3",
+          "teks": "DNS server salah",
+          "umpanBalik": "Belum tepat. Laptop belum sampai tahap memakai DNS: IP, gateway, dan DNS semuanya kosong karena tidak ada pembagian IP."
+        },
+        {
+          "id": "d4",
+          "teks": "Subnet mask diisi salah secara manual",
+          "umpanBalik": "Belum tepat. DHCP Enabled = Yes; mask 255.255.0.0 adalah bawaan APIPA, bukan hasil pengisian manual."
+        }
+      ],
+      "perbaikan": [
+        {
+          "id": "f1",
+          "benar": true,
+          "teks": "Periksa dan aktifkan layanan DHCP di router/server, lalu jalankan ipconfig /release dan ipconfig /renew di laptop",
+          "umpanBalik": "Benar. Sumber masalah ada di DHCP. Setelah layanan hidup, /release dan /renew membuat laptop meminta IP baru."
+        },
+        {
+          "id": "f2",
+          "teks": "Ganti kabel LAN dengan yang baru",
+          "umpanBalik": "Tidak perlu. Lampu link menyala — kabel berfungsi. Mengganti kabel tidak menghidupkan DHCP."
+        },
+        {
+          "id": "f3",
+          "teks": "Isi DNS manual 8.8.8.8",
+          "umpanBalik": "DNS tidak berguna tanpa IP dan gateway yang valid; laptop tetap tidak bisa keluar jaringan."
+        },
+        {
+          "id": "f4",
+          "teks": "Ubah subnet mask menjadi 255.255.255.0 secara manual",
+          "umpanBalik": "Mask bukan akar masalahnya. Tanpa IP/gateway yang benar dari DHCP, internet tetap tidak jalan."
+        }
+      ],
+      "pembahasan": "APIPA (169.254.0.0/16) adalah ‘IP darurat’ dari Windows saat DHCP tidak merespons. Setiap kali melihat IP 169.254.x.x, curigai DHCP (server mati, scope penuh, atau kabel ke server bermasalah). IP statis hanya solusi sementara.",
+      "ilmu": [
+        "IP 169.254.x.x = APIPA, tanda gagal mendapat IP dari DHCP.",
+        "ipconfig /release lalu ipconfig /renew meminta ulang IP dari DHCP."
+      ]
+    },
+    {
+      "id": 3,
+      "judul": "Dua Komputer, Satu Alamat",
+      "tingkat": "Mudah–Sedang",
+      "lokasi": "Kantor TU — PC Admin-03",
+      "pelapor": "Pak Dedi (staf Tata Usaha)",
+      "laporan": "“Muncul pesan ‘Windows has detected an IP address conflict’. Internet saya putus-nyambung sejak ada laptop baru di ruangan ini.”",
+      "info": "",
+      "net": {
+        "pc": "TU-ADMIN03",
+        "mac": "3C-52-82-AA-10-01",
+        "ip": "192.168.1.50",
+        "mask": "255.255.255.0",
+        "gw": "192.168.1.1",
+        "dns": "192.168.1.1",
+        "dnsName": "router.tu",
+        "dhcp": "No",
+        "domain": "www.google.com",
+        "domainIp": "142.250.190.4",
+        "gwTarget": "192.168.1.1"
+      },
+      "hasil": {
+        "ipconfig": "Windows IP Configuration\n\n   Host Name . . . . . . . . . . . . : TU-ADMIN03\n\nEthernet adapter Ethernet:\n\n   Physical Address. . . . . . . . . : 3C-52-82-AA-10-01\n   DHCP Enabled. . . . . . . . . . . : No\n   IPv4 Address. . . . . . . . . . . : 192.168.1.50(Duplicate)\n   Subnet Mask . . . . . . . . . . . : 255.255.255.0\n   Default Gateway . . . . . . . . . : 192.168.1.1\n   DNS Servers . . . . . . . . . . . : 192.168.1.1",
+        "ping_gw": "Pinging 192.168.1.1 with 32 bytes of data:\nReply from 192.168.1.1: bytes=32 time=1ms TTL=64\nRequest timed out.\nReply from 192.168.1.1: bytes=32 time=2ms TTL=64\nRequest timed out.\n\nPing statistics for 192.168.1.1:\n    Packets: Sent = 4, Received = 2, Lost = 2 (50% loss)",
+        "ping_ip": "Pinging 8.8.8.8 with 32 bytes of data:\nRequest timed out.\nReply from 8.8.8.8: bytes=32 time=19ms TTL=116\nRequest timed out.\nReply from 8.8.8.8: bytes=32 time=18ms TTL=116\n\nPing statistics for 8.8.8.8:\n    Packets: Sent = 4, Received = 2, Lost = 2 (50% loss)",
+        "ping_domain": "Pinging www.google.com [142.250.190.4] with 32 bytes of data:\nReply from 142.250.190.4: bytes=32 time=22ms TTL=115\nRequest timed out.\nRequest timed out.\nReply from 142.250.190.4: bytes=32 time=21ms TTL=115\n\nPing statistics for 142.250.190.4:\n    Packets: Sent = 4, Received = 2, Lost = 2 (50% loss)",
+        "tracert": "Tracing route to dns.google [8.8.8.8]\nover a maximum of 30 hops:\n\n  1     *        1 ms     *     192.168.1.1\n  2     3 ms     *        3 ms  10.20.0.1\n  3    12 ms    11 ms     *     36.88.0.1\n  4    18 ms     *       18 ms  dns.google [8.8.8.8]\n\nTrace complete.",
+        "arp": "Interface: 192.168.1.50 --- 0x4\n  Internet Address      Physical Address      Type\n  192.168.1.1           a4-2b-b0-11-22-33     dynamic\n  192.168.1.50          9c-b6-d0-5f-77-12     dynamic   <-- MAC berbeda dari MAC PC ini!\n  192.168.1.255         ff-ff-ff-ff-ff-ff     static"
+      },
+      "relevan": [
+        "ipconfig",
+        "arp"
+      ],
+      "par": 3,
+      "petunjuk": {
+        "mulai": "Pesan ‘IP address conflict’ berkaitan dengan alamat IP. Mulailah dengan melihat konfigurasi IP komputer ini.",
+        "baca": "Bandingkan Physical Address (MAC) PC ini dengan MAC yang tercatat di tabel ARP untuk IP yang sama. Dua MAC berbeda untuk satu IP = ada perangkat kembar.",
+        "perbaiki": "Dua perangkat tidak boleh memakai IP yang sama. Ubah salah satunya ke alamat yang kosong, atau serahkan pembagian IP ke DHCP."
+      },
+      "diagnosis": [
+        {
+          "id": "d1",
+          "benar": true,
+          "teks": "IP address bentrok: perangkat lain memakai 192.168.1.50 juga",
+          "umpanBalik": "Tepat! ipconfig menandai IP sebagai (Duplicate) dan tabel ARP memperlihatkan MAC lain (9c-b6-d0-…) memakai 192.168.1.50, berbeda dari MAC PC ini (3C-52-…)."
+        },
+        {
+          "id": "d2",
+          "teks": "Kabel LAN longgar",
+          "umpanBalik": "Belum tepat. Lampu link menyala stabil dan sistem sendiri melaporkan ‘IP conflict’. Kabel longgar tidak menghasilkan pesan itu."
+        },
+        {
+          "id": "d3",
+          "teks": "DNS server mati",
+          "umpanBalik": "Belum tepat. Yang terputus-putus adalah ping ke gateway dan alamat IP (bukan hanya nama domain), jadi akar masalahnya bukan DNS."
+        },
+        {
+          "id": "d4",
+          "teks": "Gateway salah diisi",
+          "umpanBalik": "Belum tepat. Gateway 192.168.1.1 benar dan sebagian ping-nya dibalas. Gateway yang salah akan gagal terus-menerus, bukan putus-nyambung."
+        }
+      ],
+      "perbaikan": [
+        {
+          "id": "f1",
+          "benar": true,
+          "teks": "Ubah IP PC ke alamat yang belum dipakai (atau aktifkan DHCP/reservasi IP), lalu catat di daftar alokasi IP",
+          "umpanBalik": "Benar. Setiap perangkat harus punya IP unik. Mencatat alokasi IP (atau memakai DHCP reservation) mencegah kejadian berulang."
+        },
+        {
+          "id": "f2",
+          "teks": "Ganti kabel LAN",
+          "umpanBalik": "Kabel tidak bermasalah. Konflik IP tetap muncul karena dua perangkat masih memakai alamat sama."
+        },
+        {
+          "id": "f3",
+          "teks": "Restart switch saja",
+          "umpanBalik": "Hanya meredam sementara. Begitu kedua perangkat aktif lagi, konflik muncul kembali."
+        },
+        {
+          "id": "f4",
+          "teks": "Ganti DNS menjadi 8.8.8.8",
+          "umpanBalik": "DNS bukan sumber masalah, sehingga gangguan putus-nyambung tetap terjadi."
+        }
+      ],
+      "pembahasan": "Konflik IP biasa terjadi pada jaringan yang memakai IP statis tanpa pencatatan, atau saat ada perangkat baru. Gejalanya: koneksi putus-nyambung dan ada peringatan ‘IP conflict’. arp -a membantu membuktikan siapa pemilik IP tersebut lewat MAC address.",
+      "ilmu": [
+        "arp -a menampilkan pasangan IP–MAC; satu IP dengan MAC berbeda = indikasi bentrok.",
+        "Gejala putus-nyambung (loss sebagian) berbeda dari gagal total (loss 100%)."
+      ]
+    },
+    {
+      "id": 4,
+      "judul": "Website yang Tak Mau Terbuka",
+      "tingkat": "Sedang",
+      "lokasi": "Perpustakaan — PC Baca-02",
+      "pelapor": "Pak Anwar (pustakawan)",
+      "laporan": "“Semua website di PC ini gagal dibuka, tulisannya ‘This site can’t be reached’. Tapi aplikasi chat di komputer ini masih bisa kirim pesan.”",
+      "info": "",
+      "net": {
+        "pc": "PERPUS-BACA02",
+        "mac": "F8-B4-6A-33-0C-4D",
+        "ip": "192.168.30.14",
+        "mask": "255.255.255.0",
+        "gw": "192.168.30.1",
+        "dns": "192.168.30.250",
+        "dnsName": "UnKnown",
+        "dhcp": "No",
+        "domain": "www.google.com",
+        "domainIp": "142.250.190.4",
+        "gwTarget": "192.168.30.1"
+      },
+      "hasil": {
+        "ping_domain": "Ping request could not find host www.google.com. Please check the name and try again.",
+        "nslookup": "DNS request timed out.\n    timeout was 2 seconds.\nServer:  UnKnown\nAddress:  192.168.30.250\n\nDNS request timed out.\n    timeout was 2 seconds.\n*** Request to UnKnown timed-out"
+      },
+      "relevan": [
+        "ping_ip",
+        "ping_domain",
+        "nslookup"
+      ],
+      "par": 3,
+      "petunjuk": {
+        "mulai": "Uji bertahap: apakah komputer bisa menjangkau internet lewat alamat IP (bukan nama)? Coba ‘Ping internet (alamat IP)’ lalu bandingkan dengan ‘Ping nama domain’.",
+        "baca": "Ping ke 8.8.8.8 berhasil tetapi ping ke nama domain gagal. Siapa yang bertugas menerjemahkan nama menjadi IP?",
+        "perbaiki": "Arahkan komputer ke server DNS yang benar (mis. DNS router 192.168.30.1 atau 8.8.8.8), lalu bersihkan cache DNS."
+      },
+      "diagnosis": [
+        {
+          "id": "d1",
+          "benar": true,
+          "teks": "DNS server tidak dapat dijangkau / salah (resolusi nama gagal)",
+          "umpanBalik": "Tepat! Ping ke 8.8.8.8 berhasil (internet ada), tetapi nama domain tidak bisa diterjemahkan dan nslookup time-out ke 192.168.30.250."
+        },
+        {
+          "id": "d2",
+          "teks": "Kabel LAN terlepas",
+          "umpanBalik": "Belum tepat. Ping ke gateway dan ke 8.8.8.8 berhasil, jadi koneksi fisik dan jaringan berfungsi."
+        },
+        {
+          "id": "d3",
+          "teks": "Default gateway salah",
+          "umpanBalik": "Belum tepat. Gateway 192.168.30.1 membalas ping dan rute ke internet berhasil. Gateway yang salah akan membuat ping ke 8.8.8.8 gagal."
+        },
+        {
+          "id": "d4",
+          "teks": "Jalur internet (ISP) putus",
+          "umpanBalik": "Belum tepat. Ping dan tracert ke 8.8.8.8 berhasil — jalur ke internet hidup. Yang gagal hanya penerjemahan nama."
+        }
+      ],
+      "perbaikan": [
+        {
+          "id": "f1",
+          "benar": true,
+          "teks": "Ubah DNS ke server yang benar (mis. 192.168.30.1 atau 8.8.8.8), lalu jalankan ipconfig /flushdns",
+          "umpanBalik": "Benar. Dengan DNS yang bisa dijangkau, nama domain kembali diterjemahkan menjadi IP; flushdns membersihkan cache lama."
+        },
+        {
+          "id": "f2",
+          "teks": "Ganti kabel LAN",
+          "umpanBalik": "Tidak perlu: koneksi fisik sehat, terbukti dari ping yang berhasil."
+        },
+        {
+          "id": "f3",
+          "teks": "Ubah default gateway",
+          "umpanBalik": "Gateway sudah benar; mengubahnya justru bisa memutus koneksi yang tadinya berjalan."
+        },
+        {
+          "id": "f4",
+          "teks": "Hubungi ISP untuk cek jalur internet",
+          "umpanBalik": "Belum perlu. Internet hidup (ping 8.8.8.8 sukses). Masalah ada pada pengaturan DNS di komputer ini."
+        }
+      ],
+      "pembahasan": "Aplikasi chat tetap jalan karena sebagian aplikasi memakai alamat IP/server yang sudah dikenal, sedangkan browser harus menerjemahkan nama domain lewat DNS. Pola ‘ping IP berhasil, ping nama gagal’ adalah ciri khas masalah DNS.",
+      "ilmu": [
+        "Ping ke IP berhasil + ping ke nama gagal = curigai DNS.",
+        "nslookup menguji server DNS secara langsung; ‘timed out’ berarti server DNS tak menjawab."
+      ]
+    },
+    {
+      "id": 5,
+      "judul": "Gerbang yang Salah Alamat",
+      "tingkat": "Sedang",
+      "lokasi": "Lab Multimedia — PC-12",
+      "pelapor": "Pak Bima (instruktur)",
+      "laporan": "“Saya bisa buka folder bersama dari komputer sebelah, tetapi internet tidak bisa sama sekali. IP-nya sudah saya isi manual.”",
+      "info": "Catatan jaringan: Gateway resmi Lab Multimedia = 192.168.40.1. Server berkas = 192.168.40.20.",
+      "net": {
+        "pc": "MM-PC12",
+        "mac": "00-1B-21-8C-44-F2",
+        "ip": "192.168.40.33",
+        "mask": "255.255.255.0",
+        "gw": "192.168.40.254",
+        "dns": "8.8.8.8",
+        "dnsName": "dns.google",
+        "dhcp": "No",
+        "domain": "www.google.com",
+        "domainIp": "142.250.190.4",
+        "gwTarget": "192.168.40.254"
+      },
+      "hasil": {
+        "ping_gw": "Pinging 192.168.40.254 with 32 bytes of data:\nReply from 192.168.40.33: Destination host unreachable.\nReply from 192.168.40.33: Destination host unreachable.\nReply from 192.168.40.33: Destination host unreachable.\nReply from 192.168.40.33: Destination host unreachable.\n\nPing statistics for 192.168.40.254:\n    Packets: Sent = 4, Received = 0, Lost = 4 (100% loss)",
+        "ping_ip": "Pinging 8.8.8.8 with 32 bytes of data:\nRequest timed out.\nRequest timed out.\nRequest timed out.\nRequest timed out.\n\nPing statistics for 8.8.8.8:\n    Packets: Sent = 4, Received = 0, Lost = 4 (100% loss)",
+        "ping_domain": "Ping request could not find host www.google.com. Please check the name and try again.",
+        "nslookup": "DNS request timed out.\n    timeout was 2 seconds.\nServer:  UnKnown\nAddress:  8.8.8.8\n\nDNS request timed out.\n    timeout was 2 seconds.\n*** Request to UnKnown timed-out",
+        "tracert": "Tracing route to dns.google [8.8.8.8]\nover a maximum of 30 hops:\n\n  1  MM-PC12 [192.168.40.33]  reports: Destination host unreachable.\n\nTrace complete.",
+        "arp": "Interface: 192.168.40.33 --- 0x4\n  Internet Address      Physical Address      Type\n  192.168.40.20         00-50-56-9A-1D-02     dynamic   (server berkas)\n  192.168.40.254        (incomplete)\n  192.168.40.255        ff-ff-ff-ff-ff-ff     static"
+      },
+      "relevan": [
+        "ipconfig",
+        "ping_gw",
+        "tracert"
+      ],
+      "par": 3,
+      "petunjuk": {
+        "mulai": "Bandingkan konfigurasi PC dengan catatan jaringan. Mulailah dari ‘Lihat konfigurasi IP’.",
+        "baca": "Cocokkan Default Gateway di ipconfig dengan gateway resmi pada catatan jaringan. Perhatikan juga: komputer lokal bisa dijangkau, tapi keluar jaringan tidak.",
+        "perbaiki": "Gateway adalah pintu keluar menuju jaringan lain. Ubah ke alamat gateway yang resmi."
+      },
+      "diagnosis": [
+        {
+          "id": "d1",
+          "benar": true,
+          "teks": "Default gateway salah (192.168.40.254, seharusnya 192.168.40.1)",
+          "umpanBalik": "Tepat! Gateway yang dipakai tidak sama dengan gateway resmi dan tidak pernah menjawab (ARP ‘incomplete’), sehingga lalu lintas keluar jaringan tidak punya jalan."
+        },
+        {
+          "id": "d2",
+          "teks": "DNS salah",
+          "umpanBalik": "Belum tepat. Ping ke alamat IP (8.8.8.8) juga gagal, jadi bukan sekadar urusan nama. Masalah terjadi sebelum DNS bisa dipakai."
+        },
+        {
+          "id": "d3",
+          "teks": "Kabel LAN putus",
+          "umpanBalik": "Belum tepat. Komputer lain (server berkas 192.168.40.20) masih terjangkau — buktinya ada di tabel ARP — sehingga kabel dan link berfungsi."
+        },
+        {
+          "id": "d4",
+          "teks": "DHCP tidak aktif",
+          "umpanBalik": "Belum tepat. PC memakai IP statis yang valid (bukan 169.254.x.x). DHCP tidak terlibat di sini."
+        }
+      ],
+      "perbaikan": [
+        {
+          "id": "f1",
+          "benar": true,
+          "teks": "Ubah default gateway menjadi 192.168.40.1 (atau pilih alamat otomatis dari DHCP)",
+          "umpanBalik": "Benar. Dengan gateway yang tepat, paket menuju jaringan lain diteruskan ke router."
+        },
+        {
+          "id": "f2",
+          "teks": "Ganti DNS ke 1.1.1.1",
+          "umpanBalik": "Tidak menyelesaikan masalah: tanpa gateway yang benar, server DNS apa pun tidak bisa dijangkau."
+        },
+        {
+          "id": "f3",
+          "teks": "Ganti kabel LAN dengan yang baru",
+          "umpanBalik": "Kabel sehat; komputer lokal masih terjangkau. Penggantian kabel tidak mengubah gateway."
+        },
+        {
+          "id": "f4",
+          "teks": "Ubah subnet mask menjadi 255.255.0.0",
+          "umpanBalik": "Mengubah mask tidak memperbaiki gateway yang salah dan bisa membuat pembagian subnet berantakan."
+        }
+      ],
+      "pembahasan": "Gateway adalah ‘pintu keluar’ ke jaringan lain. Jika salah, komputer masih bisa berkomunikasi di jaringan lokal (satu subnet) tetapi tidak bisa ke internet. Selalu cocokkan konfigurasi PC dengan dokumentasi jaringan.",
+      "ilmu": [
+        "Bisa akses komputer lokal tapi tak bisa ke internet = curigai gateway.",
+        "‘Destination host unreachable’ dari alamat PC sendiri berarti gateway tak ditemukan di jaringan lokal."
+      ]
+    },
+    {
+      "id": 6,
+      "judul": "Subnet yang Terpotong",
+      "tingkat": "Sedang–Sulit",
+      "lokasi": "Kantor Cabang — PC Kasir",
+      "pelapor": "Bu Maya (kasir)",
+      "laporan": "“Printer jaringan dan internet tidak bisa diakses dari PC kasir. Padahal IP sudah saya isi sesuai catatan kemarin.”",
+      "info": "Catatan jaringan kantor cabang: Network 192.168.5.0/24 (mask 255.255.255.0), gateway 192.168.5.1, DNS 192.168.5.1.",
+      "net": {
+        "pc": "CABANG-KASIR",
+        "mac": "B8-AC-6F-12-90-7A",
+        "ip": "192.168.5.130",
+        "mask": "255.255.255.128",
+        "gw": "192.168.5.1",
+        "dns": "192.168.5.1",
+        "dnsName": "UnKnown",
+        "dhcp": "No",
+        "domain": "www.google.com",
+        "domainIp": "142.250.190.4",
+        "gwTarget": "192.168.5.1"
+      },
+      "hasil": {
+        "ping_gw": "Pinging 192.168.5.1 with 32 bytes of data:\nPING: transmit failed. General failure.\nPING: transmit failed. General failure.\nPING: transmit failed. General failure.\nPING: transmit failed. General failure.\n\nPing statistics for 192.168.5.1:\n    Packets: Sent = 4, Received = 0, Lost = 4 (100% loss)",
+        "ping_ip": "Pinging 8.8.8.8 with 32 bytes of data:\nPING: transmit failed. General failure.\nPING: transmit failed. General failure.\nPING: transmit failed. General failure.\nPING: transmit failed. General failure.\n\nPing statistics for 8.8.8.8:\n    Packets: Sent = 4, Received = 0, Lost = 4 (100% loss)",
+        "ping_domain": "Ping request could not find host www.google.com. Please check the name and try again.",
+        "nslookup": "DNS request timed out.\n    timeout was 2 seconds.\nServer:  UnKnown\nAddress:  192.168.5.1\n\nDNS request timed out.\n    timeout was 2 seconds.\n*** Request to UnKnown timed-out",
+        "tracert": "Tracing route to dns.google [8.8.8.8]\nover a maximum of 30 hops:\n\n  1  General failure.\n\nTrace complete.",
+        "arp": "No ARP Entries Found."
+      },
+      "relevan": [
+        "ipconfig",
+        "ping_gw"
+      ],
+      "par": 3,
+      "petunjuk": {
+        "mulai": "Cocokkan nilai yang dipasang di PC dengan catatan jaringan. Mulailah dari ‘Lihat konfigurasi IP’.",
+        "baca": "Subnet mask 255.255.255.128 membatasi PC hanya ke 192.168.5.128–.255. Apakah gateway 192.168.5.1 termasuk di rentang itu?",
+        "perbaiki": "Samakan subnet mask PC dengan mask resmi jaringan kantor pada catatan."
+      },
+      "diagnosis": [
+        {
+          "id": "d1",
+          "benar": true,
+          "teks": "Subnet mask salah (255.255.255.128) sehingga gateway berada di luar subnet PC",
+          "umpanBalik": "Tepat! Dengan mask /25, PC 192.168.5.130 hanya menganggap 192.168.5.128–.255 sebagai jaringan lokalnya. Gateway 192.168.5.1 jadi ‘di luar’ jangkauan."
+        },
+        {
+          "id": "d2",
+          "teks": "Default gateway salah",
+          "umpanBalik": "Belum tepat. Gateway 192.168.5.1 sudah sesuai catatan resmi. Yang tidak cocok adalah subnet mask PC."
+        },
+        {
+          "id": "d3",
+          "teks": "DNS salah",
+          "umpanBalik": "Belum tepat. DNS (192.168.5.1) juga sesuai catatan; ia hanya tampak gagal karena PC tak bisa menjangkau jaringan tersebut."
+        },
+        {
+          "id": "d4",
+          "teks": "Kabel LAN terlepas",
+          "umpanBalik": "Belum tepat. Adapter aktif dan memiliki IP; hasil ipconfig tidak menunjukkan ‘Media disconnected’."
+        }
+      ],
+      "perbaikan": [
+        {
+          "id": "f1",
+          "benar": true,
+          "teks": "Ubah subnet mask PC menjadi 255.255.255.0",
+          "umpanBalik": "Benar. Dengan /24, 192.168.5.130 dan gateway 192.168.5.1 berada dalam satu subnet sehingga bisa saling berkomunikasi."
+        },
+        {
+          "id": "f2",
+          "teks": "Ubah gateway menjadi 192.168.5.129",
+          "umpanBalik": "Alamat itu bukan router. Gateway resmi tetap 192.168.5.1; hanya mask PC yang perlu dikoreksi."
+        },
+        {
+          "id": "f3",
+          "teks": "Ganti DNS ke 8.8.8.8",
+          "umpanBalik": "Tidak membantu: PC masih tidak bisa keluar subnet-nya, sehingga DNS tetap tak terjangkau."
+        },
+        {
+          "id": "f4",
+          "teks": "Ganti IP PC menjadi 192.168.5.1",
+          "umpanBalik": "Itu alamat gateway! Dua perangkat dengan IP sama akan menimbulkan konflik baru."
+        }
+      ],
+      "pembahasan": "Subnet mask menentukan alamat mana yang dianggap ‘satu jaringan’. Jika gateway tidak berada di subnet yang sama dengan PC, paket tak pernah diteruskan ke router. Kesalahan mask kecil (…128 vs …0) sering lolos dari pemeriksaan sekilas.",
+      "ilmu": [
+        "Gateway harus berada dalam subnet yang sama dengan IP PC.",
+        "/25 (255.255.255.128) membagi jaringan /24 menjadi dua bagian 128 alamat."
+      ]
+    },
+    {
+      "id": 7,
+      "judul": "Putus di Tengah Jalan",
+      "tingkat": "Sulit",
+      "lokasi": "Kantor Pusat — seluruh ruangan",
+      "pelapor": "Bu Lina (manajer)",
+      "laporan": "“Seluruh komputer kantor tidak bisa internet sejak pagi. Tapi file server internal masih bisa dibuka. Sudah restart PC, tidak ada perubahan.”",
+      "info": "",
+      "net": {
+        "pc": "PUSAT-PC45",
+        "mac": "D4-3D-7E-0F-61-C8",
+        "ip": "10.10.1.45",
+        "mask": "255.255.255.0",
+        "gw": "10.10.1.1",
+        "dns": "10.10.1.1",
+        "dnsName": "router.kantor",
+        "dhcp": "Yes",
+        "domain": "www.google.com",
+        "domainIp": "142.250.190.4",
+        "gwTarget": "10.10.1.1"
+      },
+      "hasil": {
+        "kabel": "Hasil pemeriksaan fisik:\n • Kabel LAN PC terpasang kuat; lampu link HIJAU menyala.\n • Di ruang perangkat: router kantor menyala normal dan semua port LAN aktif.\n • Modem/ONT milik ISP: lampu ‘LOS’ menyala MERAH, lampu ‘Internet’ mati.",
+        "ping_ip": "Pinging 8.8.8.8 with 32 bytes of data:\nRequest timed out.\nRequest timed out.\nRequest timed out.\nRequest timed out.\n\nPing statistics for 8.8.8.8:\n    Packets: Sent = 4, Received = 0, Lost = 4 (100% loss)",
+        "ping_domain": "Ping request could not find host www.google.com. Please check the name and try again.",
+        "nslookup": "DNS request timed out.\n    timeout was 2 seconds.\nServer:  UnKnown\nAddress:  10.10.1.1\n\nDNS request timed out.\n    timeout was 2 seconds.\n*** Request to UnKnown timed-out",
+        "tracert": "Tracing route to dns.google [8.8.8.8]\nover a maximum of 30 hops:\n\n  1    <1 ms    <1 ms    <1 ms  10.10.1.1          (router kantor)\n  2     2 ms     2 ms     2 ms  192.168.100.1      (modem ISP)\n  3     *        *        *     Request timed out.\n  4     *        *        *     Request timed out.\n  5     *        *        *     Request timed out.\n  ... (hop 6 s.d. 30: semuanya Request timed out)\n\nTrace complete.",
+        "arp": "Interface: 10.10.1.45 --- 0x4\n  Internet Address      Physical Address      Type\n  10.10.1.1             a4-2b-b0-11-22-33     dynamic\n  10.10.1.20            00-50-56-9A-1D-02     dynamic   (file server)\n  10.10.1.255           ff-ff-ff-ff-ff-ff     static"
+      },
+      "relevan": [
+        "ping_gw",
+        "ping_ip",
+        "tracert",
+        "kabel"
+      ],
+      "par": 3,
+      "petunjuk": {
+        "mulai": "Uji dari dekat ke jauh: gateway dulu, lalu alamat IP di internet. Coba ‘Ping gateway’ dan ‘Ping internet (alamat IP)’.",
+        "baca": "Gateway menjawab tetapi 8.8.8.8 tidak. Gunakan ‘Telusuri rute’ untuk melihat hop mana yang terakhir menjawab.",
+        "perbaiki": "Rute berhenti setelah perangkat milik ISP. Jaringan lokal sehat, jadi perbaikannya ada di sisi penyedia layanan."
+      },
+      "diagnosis": [
+        {
+          "id": "d1",
+          "benar": true,
+          "teks": "Gangguan di sisi ISP / jalur internet (uplink); jaringan lokal sehat",
+          "umpanBalik": "Tepat! tracert berhenti setelah hop modem ISP (hop 2), ping ke gateway berhasil, dan lampu ‘LOS’ modem merah — jalur ke ISP putus, bukan masalah di PC."
+        },
+        {
+          "id": "d2",
+          "teks": "DNS salah di seluruh komputer",
+          "umpanBalik": "Belum tepat. Ping ke alamat IP 8.8.8.8 pun gagal dan rute terhenti di hop ISP; DNS bukan penyebab utama."
+        },
+        {
+          "id": "d3",
+          "teks": "Kabel LAN PC terlepas",
+          "umpanBalik": "Belum tepat. Link PC menyala, gateway dan file server lokal bisa dijangkau. Lagi pula yang terdampak seluruh komputer, bukan satu PC."
+        },
+        {
+          "id": "d4",
+          "teks": "Default gateway PC salah",
+          "umpanBalik": "Belum tepat. Hop 1 pada tracert adalah gateway (10.10.1.1) dan membalas normal."
+        }
+      ],
+      "perbaikan": [
+        {
+          "id": "f1",
+          "benar": true,
+          "teks": "Laporkan ke ISP (sertakan lampu LOS merah & hasil tracert) dan aktifkan jalur cadangan/hotspot bila tersedia",
+          "umpanBalik": "Benar. Bukti tracert dan lampu LOS mempercepat penanganan ISP, sementara jalur cadangan menjaga pekerjaan tetap berjalan."
+        },
+        {
+          "id": "f2",
+          "teks": "Ganti DNS di semua PC menjadi 8.8.8.8",
+          "umpanBalik": "Percuma: jalur ke internet sendiri terputus, sehingga DNS publik pun tidak dapat dijangkau."
+        },
+        {
+          "id": "f3",
+          "teks": "Ganti semua kabel LAN di kantor",
+          "umpanBalik": "Boros dan tidak relevan: jaringan lokal bekerja normal."
+        },
+        {
+          "id": "f4",
+          "teks": "Ubah ulang IP seluruh komputer",
+          "umpanBalik": "Konfigurasi IP sudah benar. Mengubahnya hanya menambah risiko masalah baru."
+        }
+      ],
+      "pembahasan": "tracert menunjukkan di hop mana rute berhenti sehingga kita bisa menentukan apakah masalah ada di jaringan sendiri atau di pihak lain (ISP). Teknisi yang baik tahu kapan masalah di luar kewenangannya dan membawa bukti ke ISP.",
+      "ilmu": [
+        "tracert: hop terakhir yang menjawab menunjukkan batas masalah.",
+        "Gateway lokal OK + internet gagal + semua pengguna terdampak = curigai ISP/uplink."
+      ]
+    },
+    {
+      "id": 8,
+      "judul": "Satu Situs yang Tersesat",
+      "tingkat": "Sulit",
+      "lokasi": "Lab Jaringan — PC Instruktur",
+      "pelapor": "Pak Rizal (instruktur)",
+      "laporan": "“Website e-learning sekolah tidak bisa dibuka di PC ini saja. Situs lain normal, dan di PC siswa e-learning-nya terbuka. Aneh sekali.”",
+      "info": "Catatan jaringan: elearning.sekolah.sch.id seharusnya menuju server 203.0.113.20.",
+      "net": {
+        "pc": "LABJAR-INSTR",
+        "mac": "2C-F0-5D-77-AB-19",
+        "ip": "192.168.50.5",
+        "mask": "255.255.255.0",
+        "gw": "192.168.50.1",
+        "dns": "192.168.50.1",
+        "dnsName": "router.labjar",
+        "dhcp": "Yes",
+        "domain": "elearning.sekolah.sch.id",
+        "domainIp": "203.0.113.20",
+        "gwTarget": "192.168.50.1"
+      },
+      "hasil": {
+        "ping_domain": "Pinging elearning.sekolah.sch.id [127.0.0.1] with 32 bytes of data:\nReply from 127.0.0.1: bytes=32 time<1ms TTL=128\nReply from 127.0.0.1: bytes=32 time<1ms TTL=128\nReply from 127.0.0.1: bytes=32 time<1ms TTL=128\nReply from 127.0.0.1: bytes=32 time<1ms TTL=128\n\nPing statistics for 127.0.0.1:\n    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss)",
+        "hosts": "# Copyright (c) 1993-2009 Microsoft Corp.\n#\n# File HOSTS ini memetakan nama host ke alamat IP.\n#\n#   127.0.0.1       localhost\n#   ::1             localhost\n\n127.0.0.1    elearning.sekolah.sch.id"
+      },
+      "relevan": [
+        "ping_domain",
+        "nslookup",
+        "hosts"
+      ],
+      "par": 3,
+      "petunjuk": {
+        "mulai": "Hanya satu situs dan hanya satu PC yang bermasalah. Bandingkan hasil ‘Ping nama domain’ dengan ‘Cek DNS’ untuk situs itu.",
+        "baca": "nslookup menjawab IP yang benar, tetapi ping menuju 127.0.0.1 (komputer sendiri). Windows punya file lokal yang dibaca lebih dulu daripada DNS. Coba ‘Baca file hosts’.",
+        "perbaiki": "Hapus atau beri tanda komentar (#) pada baris yang salah di file hosts, lalu bersihkan cache DNS."
+      },
+      "diagnosis": [
+        {
+          "id": "d1",
+          "benar": true,
+          "teks": "Entri salah di file hosts mengarahkan domain e-learning ke 127.0.0.1",
+          "umpanBalik": "Tepat! nslookup (yang langsung bertanya ke DNS) memberi 203.0.113.20, tetapi ping memakai 127.0.0.1 karena file hosts dibaca lebih dulu oleh Windows."
+        },
+        {
+          "id": "d2",
+          "teks": "Server DNS jaringan mati",
+          "umpanBalik": "Belum tepat. nslookup mendapat jawaban benar dari DNS, dan situs lain bisa dibuka — DNS berfungsi."
+        },
+        {
+          "id": "d3",
+          "teks": "Server web e-learning sekolah sedang mati",
+          "umpanBalik": "Belum tepat. Di PC siswa situs yang sama terbuka normal, dan nslookup menunjukkan alamat server yang benar."
+        },
+        {
+          "id": "d4",
+          "teks": "Koneksi internet / ISP terputus",
+          "umpanBalik": "Belum tepat. Ping ke 8.8.8.8 dan situs lain berfungsi; internet hidup."
+        }
+      ],
+      "perbaikan": [
+        {
+          "id": "f1",
+          "benar": true,
+          "teks": "Buka file hosts sebagai Administrator, hapus/komentari baris 127.0.0.1 elearning.sekolah.sch.id, lalu jalankan ipconfig /flushdns",
+          "umpanBalik": "Benar. Setelah entri keliru dihapus, Windows kembali bertanya ke DNS dan mendapat alamat server yang sebenarnya."
+        },
+        {
+          "id": "f2",
+          "teks": "Ganti DNS ke 8.8.8.8",
+          "umpanBalik": "DNS sudah menjawab benar. Memindahkan DNS tidak mengalahkan file hosts yang tetap dibaca lebih dulu."
+        },
+        {
+          "id": "f3",
+          "teks": "Restart server web e-learning",
+          "umpanBalik": "Server sehat — bisa dibuka dari PC lain. Merestartnya mengganggu seluruh siswa tanpa guna."
+        },
+        {
+          "id": "f4",
+          "teks": "Ganti kabel LAN PC instruktur",
+          "umpanBalik": "Kabel tidak bermasalah; situs lain di PC ini berjalan normal."
+        }
+      ],
+      "pembahasan": "Urutan resolusi nama di Windows: cache → file hosts → DNS. Karena itu satu entri di file hosts dapat ‘membelokkan’ satu situs saja di satu PC, sementara nslookup (yang melewati hosts) tetap menunjukkan jawaban DNS yang benar. Membandingkan ping dan nslookup adalah trik diagnosis yang ampuh.",
+      "ilmu": [
+        "nslookup mengabaikan file hosts, sedangkan ping tidak.",
+        "Satu situs bermasalah di satu PC = curigai hosts, proxy, atau cache lokal."
+      ]
+    }
+  ],
+  "glosarium": [
+    {
+      "perintah": "ipconfig /all",
+      "fungsi": "Menampilkan konfigurasi jaringan komputer: IP, subnet mask, gateway, DNS, dan status DHCP.",
+      "baca": "Periksa: ‘Media disconnected’ (kabel/link), IP 169.254.x.x (DHCP gagal), gateway kosong atau tidak cocok dengan catatan, tanda (Duplicate)."
+    },
+    {
+      "perintah": "ping <tujuan>",
+      "fungsi": "Menguji apakah suatu perangkat dapat dijangkau dan berapa lama balasannya.",
+      "baca": "‘Reply’ = berhasil. ‘Request timed out’ = tidak ada balasan. ‘Destination host unreachable’ = rute/gateway tidak ditemukan. ‘General failure’ = masalah lokal (adapter/IP)."
+    },
+    {
+      "perintah": "nslookup <domain>",
+      "fungsi": "Menanyakan alamat IP sebuah nama domain langsung ke server DNS.",
+      "baca": "Jika ‘timed out’, server DNS tidak menjawab. Jika jawaban IP berbeda dengan hasil ping, curigai file hosts atau cache."
+    },
+    {
+      "perintah": "tracert <tujuan>",
+      "fungsi": "Menampilkan rute (hop) yang dilalui paket menuju tujuan.",
+      "baca": "Hop terakhir yang masih menjawab menunjukkan batas masalah. Tanda * berarti tidak ada balasan pada hop tersebut."
+    },
+    {
+      "perintah": "arp -a",
+      "fungsi": "Menampilkan pasangan alamat IP dan MAC address yang dikenal komputer.",
+      "baca": "Satu IP dengan MAC yang berbeda dari milik kita menandakan IP bentrok."
+    },
+    {
+      "perintah": "File hosts",
+      "fungsi": "Berkas teks lokal yang memetakan nama domain ke IP sebelum DNS ditanya.",
+      "baca": "Entri yang tidak dikenal (mis. 127.0.0.1 untuk situs tertentu) dapat membelokkan situs tersebut."
+    }
+  ],
+  "alurTroubleshooting": [
+    {
+      "langkah": "Pahami gejala",
+      "isi": "Baca laporan pengguna: apa yang gagal, siapa yang terdampak, kapan mulai?"
+    },
+    {
+      "langkah": "Periksa fisik",
+      "isi": "Kabel, lampu link, dan perangkat. Masalah paling sederhana sering ada di sini."
+    },
+    {
+      "langkah": "Uji dari dekat ke jauh",
+      "isi": "Lihat konfigurasi IP → ping gateway → ping IP internet → ping nama domain / nslookup → tracert."
+    },
+    {
+      "langkah": "Tentukan penyebab",
+      "isi": "Cocokkan pola hasil dengan penyebab; singkirkan dugaan yang tidak sesuai bukti."
+    },
+    {
+      "langkah": "Perbaiki lalu verifikasi",
+      "isi": "Lakukan perbaikan paling tepat dan sederhana, kemudian uji kembali koneksinya."
+    }
+  ]
+}
